@@ -11,7 +11,7 @@ const colors = [
     'rgba(211,211,211,0.8)'
 ]; 
 const maxsize = 40;
-const minsize = 0;
+const minsize = 0.1;
 const mouseRadius = 60;
 
 // mouse position
@@ -57,7 +57,7 @@ Particle.prototype.update = function() {
 
     // mouse interactivity
     if (   mouse.x - this.x < mouseRadius
-        && mouse.x - this.x >- mouseRadius
+        && mouse.x - this.x > -mouseRadius
         && mouse.y - this.y < mouseRadius
         && mouse.y - this.y > -mouseRadius) {
             if (this.size < maxSize) {
@@ -66,7 +66,7 @@ Particle.prototype.update = function() {
         } else if (this.size > minSize) {
             this.size -= 0.1;
         }
-        if (this.sies < 0) {
+        if (this.size < 0) {
             this.size = 0;
         }
         this.draw();
@@ -74,13 +74,13 @@ Particle.prototype.update = function() {
 // create particle array
 function init() {
     particleArray = [];
-    for (let i =0; i< 1000; i++) {
+    for (let i =0; i < 1000; i++) {
         let size = 0;
-        let x = Math.random() * ((innerWidth - size *2) - (size* 2)) + size * 2;
-        let y = Math.random() * ((innerHeight - size *2) - (size* 2)) + size * 2;
+        let x = Math.random() * ((innerWidth - size * 2) - (size*2)) + size * 2;
+        let y = Math.random() * ((innerHeight - size * 2) - (size*2)) + size * 2;
         let directionX = (Math.random() * .2) - .1;
         let directionY = (Math.random() * .2) - .1;
-        let color = colors [Math.floor(Math.random() * colors.lenght)];
+        let color = colors [Math.floor(Math.random() * colors.length)];
 
         particleArray.push(new Particle(x, y, directionX, directionY, size, color));
     }
@@ -97,7 +97,7 @@ function animate() {
 init();
 animate();
 
-
+//  resize event
 window.addEventListener('resize',
     function(){
         canvas.width = innerWidth;
