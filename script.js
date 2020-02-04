@@ -27,50 +27,52 @@ window.addEventListener('mousemove',
      }
 )
 //  create constroctor funcion for particle
-function Particle(x, y, directionX, directionY, size, color) {
-    this.x = x;
-    this.y = y;
-    this.directionX = directionX;
-    this.directionY = directionY;
-    this.size = size;
-    this.color = color;
-}
-// add draw method to particle prototype
-Particle.prototype.draw = function() {
-    ctx.beginPath();
-    ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2, false);
-    ctx.fillStyle = this.color;
-    ctx.fill();
-}
-// add update method to particle prototype
-Particle.prototype.update = function() {
-    if (this.x + this.size*2 > canvas.width || 
-        this.x - this.size*2 < 0) {
-        this.directionX = -this.directionX;
+class Particle {
+    constructor(x, y, directionX, directionY, size, color) {
+        this.x = x;
+        this.y = y;
+        this.directionX = directionX;
+        this.directionY = directionY;
+        this.size = size;
+        this.color = color;
     }
-    if (this.y + this.size*2 > canvas.height || 
-        this.y - this.size*2 < 0) {
-        this.directionY = -this.directionY;
+    // add draw method to particle prototype
+    draw() {
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2, false);
+        ctx.fillStyle = this.color;
+        ctx.fill();
     }
-    this.x += this.directionX;
-    this.y += this.directionY;
-
-    // mouse interactivity
-    if (   mouse.x - this.x < mouseRadius
-        && mouse.x - this.x > -mouseRadius
-        && mouse.y - this.y < mouseRadius
-        && mouse.y - this.y > -mouseRadius) {
+    // add update method to particle prototype
+    update() {
+        if (this.x + this.size * 2 > canvas.width ||
+            this.x - this.size * 2 < 0) {
+            this.directionX = -this.directionX;
+        }
+        if (this.y + this.size * 2 > canvas.height ||
+            this.y - this.size * 2 < 0) {
+            this.directionY = -this.directionY;
+        }
+        this.x += this.directionX;
+        this.y += this.directionY;
+        // mouse interactivity
+        if (mouse.x - this.x < mouseRadius
+            && mouse.x - this.x > -mouseRadius
+            && mouse.y - this.y < mouseRadius
+            && mouse.y - this.y > -mouseRadius) {
             if (this.size < maxSize) {
                 this.size += 3;
             }
-        } else if (this.size > minSize) {
+        }
+        else if (this.size > minSize) {
             this.size -= 0.1;
         }
         if (this.size < 0) {
             this.size = 0;
         }
         this.draw();
-} 
+    }
+}
 // create particle array
 function init() {
     particleArray = [];
