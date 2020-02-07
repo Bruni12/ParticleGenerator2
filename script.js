@@ -1,4 +1,4 @@
-const canvas = document.getElementById("canvas1");
+const canvas = document.getElementById('canvas1');
 const ctx = canvas.getContext('2d');
 ctx.canvas.width = window.innerWidth;
 ctx.canvas.height = window.innerHeight;
@@ -78,8 +78,8 @@ function init() {
     particleArray = [];
     for (let i =0; i < 1000; i++) {
         let size = 0;
-        let x = Math.random() * ((innerWidth - size * 2) - (size*2)) + size * 2;
-        let y = Math.random() * ((innerHeight - size * 2) - (size*2)) + size * 2;
+        let x = Math.random() * ((innerWidth - size * 2) - (size * 2)) + size * 2;
+        let y = Math.random() * ((innerHeight - size * 2) - (size * 2)) + size * 2;
         let directionX = (Math.random() * .2) - .1;
         let directionY = (Math.random() * .2) - .1;
         let color = colors [Math.floor(Math.random() * colors.length)];
